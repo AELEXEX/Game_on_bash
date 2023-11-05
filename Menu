@@ -1,0 +1,26 @@
+#!/bin/bash
+while true
+do
+echo "======================================================================"
+echo "Чтобы посмотреть хорактеристики вашего персонажа, введите [v]iperson"
+echo "Чтобы пойти в подземелье, введите [D]angon"
+echo "Чтобы пойти пройтись по городу, введите [W]olk"
+echo "======================================================================"
+read -r C
+echo $C
+case $C in
+v)
+cd Person
+source ./viperson
+cd ..
+;;
+D)
+cd Locations/Dangon
+. ./Dangon ;;
+W)
+cd Locations/Town
+. ./Town_Wolc ;;
+*) echo "Неверная команда"
+;;
+esac
+done
