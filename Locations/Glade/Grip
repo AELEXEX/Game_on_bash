@@ -1,0 +1,125 @@
+#!/bin/bash
+cd ../../Person
+. ./person
+. ./person_weapon
+cd ../Locations/Glade
+griphelth=5
+gripS=3
+clear
+cat ../../Frames/glade/grip.txt
+echo -e "Вы ходите по поляне\r"
+sleep 5
+echo -e "\033[K\c"
+echo -e "В комнате вы видите небольшую ящерку, греющуюся на камне\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы вступаете в бой с грипом\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Грип бросается на вас\r\c"
+sleep 5
+echo -e "\033[K\c" 
+ a=$RANDOM
+  let "a %= 2"
+  if [ $a -eq 1 ];
+   then
+    echo -e "Грип попадает по вам\r\c"
+    sleep 5
+    echo -e "\033[K\c"
+    let health=$health-2
+    let armor_enduranse=$armor_enduranse-1
+   else
+    echo -e "Грип не попадает по вам\r\c"
+    sleep 5
+    echo -e "\033[K\c"
+  fi
+while [ $griphelth -gt 0 ]
+ do
+  echo -e "Выберите вариант:"
+  echo -e "1 - Нанести удар"
+  echo -e "2 - Заблокировать удар"
+  read -r C
+  sleep 5
+  echo -e "\033[5A"
+  tput ed
+  case $C in
+  1)
+  echo -e "Вы наносите удар по грипу\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  a=$RANDOM
+  let "a %= 2"
+  if [ $a -eq 1 ];
+   then
+    echo -e "Вы попадаете по грипу\r\c"
+    sleep 5
+    echo -e "\033[K\c"
+    let griphelth=$griphelth-$damage
+    let weapon_enduranse=$weapon_enduranse-1
+   else
+    echo -e "Вы не попадаете по грипу\r\c"
+    sleep 5
+    echo -e "\033[K\c"
+  fi
+  ;;
+  2)
+   echo -e "Вы блокируете удар\r\c"
+   sleep 5
+   echo -e "\033[K\c"
+   bloc_stand=1
+  ;;
+  esac
+  echo -e "Грип бросается на вас\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  a=$RANDOM
+  let "a %= 2"
+  if [ $a -eq 1 ];
+   then
+     if [[ $bloc_stand -eq 1 && $bloc > $skilletS ]] ;  then
+      echo -e "Вы блокируете удар\r\c"
+      sleep 5
+      echo -e "\033[K\c"
+    elif [[ $bloc_stand -eq 1 && $bloc > $skilletS ]]; then
+     echo -e "Грип пробивает ваш блок\r\c"
+     sleep 5
+     echo -e "\033[K\c"
+     let health=$health-10
+     let armor_enduranse=$armor_enduranse-10
+    else
+      echo -e "Грип попадает по вам\r\c"
+      sleep 5
+      echo -e "\033[K\c"
+      let health=$health-10
+      let armor_enduranse=$armor_enduranse-10
+    fi
+   else
+    echo -e "Грип не попадает по вам\r\c"
+    sleep 5
+    echo -e "\033[K\c"
+  fi
+ done
+echo -e "Вы победили грипа\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы получили предмет - Тушка грипа \r\c"
+sleep 5
+echo -e "\033[K\c"
+f=$(grep "Тушка_грипа" ../../Person/inventary)
+if [[ $f == "" ]];
+then
+ echo "Тушка_грипа 1" >> ../../Person/inventary
+else
+ a=$(awk '/Тушка_грипа/{ print NR }' ../../Person/inventary)
+ my=`sed -n "${a}p"  ../../Person/inventary`
+ arrb=($my)
+ let arrb[1]=${arrb[1]}+1
+ d="${arrb[0]} ${arrb[1]}"
+ sed -i "${a}c\ $d" ../../Person/inventary
+fi
+let exp=$exp+5
+sed -r -i.bak "s/exp=([[:graph:]]+)/exp=$exp/" ../../Person/person
+sed -r -i.bak "s/MOUNY=([[:graph:]]+)/MOUNY=$MOUNY/" ../../Person/person
+sed -r -i.bak "s/helth=([[:graph:]]+)/helth=$helth/" ../../Person/person
+sed -r -i.bak "s/armor_enduranse=([[:graph:]]+)/armor_enduranse=$armor_enduranse/" ../../Person/person_armor
+sed -r -i.bak "s/weapon_enduranse=([[:graph:]]+)/weapon_enduranse=$weapon_enduranse/" ../../Person/person_weapon

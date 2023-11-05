@@ -1,0 +1,54 @@
+#!/bin/bash
+
+. ../../Person/person
+room=0
+clear
+cat ../../Frames/glade/glade.txt
+echo "Вы продолжаете гулять по поляне\r\s"
+echo "Выберите вариант"
+echo "1 - Продолжить ходить по поляне"
+echo "2 - Вернуться к охотнику"
+read -r C
+case $C in
+1)
+RANGE=10
+variant=$RANDOM
+let "variant %= $RANGE"
+echo "$variant"
+case $(($RANDOM % 10)) in
+ 0)
+   source ./Grip;;
+ 1)
+   source ./Grip;;
+ 2)
+   source ./Grip;;
+ 3)
+   source ./Grip;;
+ 4)
+   source ./Grip;;
+ 5)
+   source ./Grip;;
+ 6)
+   source ./Med_plants;;
+ 7)
+   source ./Med_plants;;
+ 8)
+   source ./Med_plants;;
+ *) source ./Med_plants;;
+esac
+;;
+2)
+ a=$(awk '/Тушка_грипа/{ print NR }' ../../Person/inventary)
+ echo "$a"
+ my=`sed -n "${a}p"  ../../Person/inventary`
+ arrb=($my)
+ if (( ${arrb[1]} >= 10 )); then
+  cd ../../Qwests/Hanter
+  . ./win_retern
+ else
+   cd ../../Qwests/Hanter
+   . ./lose_retern
+ fi
+;;
+esac
+

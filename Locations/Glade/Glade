@@ -1,0 +1,35 @@
+#!/bin/bash
+clear
+cat ../../Frames/glade/glade.txt
+echo -e "Вы выходите на поляну\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вокруг много цветов, всюду летают бабочки и пчёлы\r\c"
+sleep 5
+echo -e "\033[K\c"
+RANGE=10
+variant=$RANDOM
+let "variant %= $RANGE"
+echo "$variant"
+case $(($RANDOM % 10)) in
+ 0)
+   source ./Grip;;
+ 1)
+   source ./Grip;;
+ 2)
+   source ./Grip;;
+ 3)
+   source ./Grip;;
+ 4)
+   source ./Grip;;
+ 5)
+   source ./Med_plants;;
+ 6)
+   source ./Med_plants;;
+ 7)
+   source ./Med_plants;;
+ 8)
+   source ./Med_plants;;
+ *) source ./Med_plants;;
+esac
+./Continue_Dangon

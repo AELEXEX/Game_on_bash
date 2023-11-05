@@ -1,0 +1,48 @@
+#!/bin/bash
+cd ../../Person
+. ./person
+. ./person_weapon
+cd ../Locations/Glade
+griphelth=5
+gripS=3
+clear
+cat ../../Frames/glade/med_plant.txt
+echo -e "Вы ходите по поляне\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "В траве вы замечаете лекарственное ростение\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo "Выберите вариант:"
+echo "1 - Собрать ростение"
+echo "2 - Пройти мимо"
+read -r C
+sleep 5
+echo -e "\033[5A"
+tput ed
+case $C in
+1)
+ echo -e "Вы срываете растение\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ f=$(grep "Лекарственное_ростение" ../../Person/inventary)
+ if [[ $f == "" ]];
+ then
+  echo "Лекарственное_ростение 1" >> ../../Person/inventary
+ else
+  a=$(awk '/Лекарственное_ростение/{ print NR }' ../../Person/inventary)
+  my=`sed -n "${a}p"  ../../Person/inventary`
+  arrb=($my)
+  let arrb[1]=${arrb[1]}+1
+  d="${arrb[0]} ${arrb[1]}"
+  sed -i "${a}c\ $d" ../../Person/inventary
+ fi
+;;
+2)
+;;
+esac
+sed -r -i.bak "s/exp=([[:graph:]]+)/exp=$exp/" ../../Person/person
+sed -r -i.bak "s/MOUNY=([[:graph:]]+)/MOUNY=$MOUNY/" ../../Person/person
+sed -r -i.bak "s/helth=([[:graph:]]+)/helth=$helth/" ../../Person/person
+sed -r -i.bak "s/armor_enduranse=([[:graph:]]+)/armor_enduranse=$armor_enduranse/" ../../Person/person_armor
+sed -r -i.bak "s/weapon_enduranse=([[:graph:]]+)/weapon_enduranse=$weapon_enduranse/" ../../Person/person_weapon
