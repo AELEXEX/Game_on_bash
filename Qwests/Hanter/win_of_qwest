@@ -1,0 +1,91 @@
+#!/bin/bash
+cd ../../Person
+. ./person
+. ./person_armor
+. ./person_headarmor
+cd ../Qwests/Hanter
+clear
+cat ../../Frames/qwests/hanter/hanter.txt
+let qwest_chein_progress[0]=${qwest_chein_progress[0]}++
+sed -r -i.bac "s/qwest_chein_progress[0]([[:graph:]]+)/qwest_chein_progress[0]=${qwest_chein_progress[0]}/" ../../Person/person
+echo ""
+echo -e "Вы возваращаетесь к охотнику\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Охотник: Как успехи?\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы: Отлично, вот добыча\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Охотник: Отлично, отдохни и подойди ко мне с утра\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы: Хорошо\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы поднимаетесь на чердак и отдыхаете\r\c"
+sleep 5
+echo -e "\033[K\c"
+if (($feary == 1)); then
+ echo -e "Феари: Так вот кто такой охотник...\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "Вы: О, ты всё ещё тут, я думал, ты уже улетела\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "Феари: Ну и куда я полечу, а с тобой интересно\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "Вы: И что во мне такого интересного?\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "Феари: Ну... ты человек, и ты в интересные места ходишь...\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "Вы: Ладно, шут с тобой, давай спать\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+fi
+echo -e "Утром вы спускаететесь с чердака\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Охотник всё так же сидит на крыльце и смотрит в даль\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Охотник: О, ты проснулся, отлично\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Охотник заходит домой, и через некоторое время возввращается с копьём в руках\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Копьё выглядит давольно небычно\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Древко исписано какими-то символами, наконечник выполнен из оленьего рога со вставками из тех самых белых самоцветов\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Охотник: Держи, заслужил\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы: Ого... спасибо\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Охотник: Ой, да ладно, заслужил\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы получили предмет - копьё охотника\r\c"
+sleep 5
+echo -e "\033[K\c"
+arrmyh=(Копьё_охотника 0 30 250)
+weapon_name=${arrmyh[0]}
+weapon_damage=${arrmyh[2]}
+weapon_enduranse=${arrmyh[3]}
+sed -r -i "s/weapon_name([[:graph:]]+)/weapon_name=${arrmyh[0]}/" ../Person/person_weapon
+sed -r -i.bac "s/weapon_damage([[:graph:]]+)/weapon_damage=$weapon_damage/" ../Person/person_weapon
+sed -r -i.bac "s/weapon_enduranse([[:graph:]]+)/weapon_enduranse=$weapon_enduranse/" ../Person/person_weapon
+cd ../..
+./Menu

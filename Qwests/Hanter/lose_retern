@@ -1,0 +1,72 @@
+#!/bin/bash
+cd ../../Person
+. ./person
+. ./person_armor
+. ./person_headarmor
+cd ../Qwests/Hanter
+clear
+cat ../../Frames/qwests/hanter/hanter.txt
+echo ""
+echo -e "Вы озваращаетесь к охотнику\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Охотник: Как успехи?\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы: Никак, животное сбежало\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Охотник: Ну что теперь будешь делать\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Выберите вариант:"
+echo -e "1 - Попробовать снова"
+echo -e "2 - Вернуться в город"
+read -r C
+echo -e "\033[5A"
+tput ed
+case $C in
+1)
+ echo -e "Вы: Попробую по новой\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "Охотник: Хорошо, жду, куда идти ты знаешь\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ case ${qwest_chein_progress[0]} in
+ 1)
+  . ./riwer1
+ ;;
+ 2)
+  cd ../../Locations/Glade
+  . ./Glade
+ ;;
+2)
+ echo -e "Вы: Схожу в город, может, прикуплю что-нибудь\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "Охотник: Как хочешь"
+ sleep 5
+ echo -e "\033[K\c"
+ . ../../Menu
+;;
+esac
+echo -e "Продавец: Приходите ещё\r\c"
+sed -r -i.bac "s/MOUNY([[:graph:]]+)/MOUNY=$MOUNY/" ../../Person/person
+sed -r -i "s/headarmor_name([[:graph:]]+)/headarmor_name=${arrmyh[0]}/" person_headarmor
+sed -r -i.bac "s/headarmor_protekt([[:graph:]]+)/headarmor_protekt=$headarmor_protekt/" person_headarmor
+sed -r -i.bac "s/headarmor_enduranse([[:graph:]]+)/headarmor_enduranse=$headarmor_enduranse/" person_headarmor
+sed -r -i.bac "s/headarmor_S([[:graph:]]+)/headarmor_S=$headarmor_S/" person_headarmor
+sed -r -i.bac "s/headarmor_A([[:graph:]]+)/headarmor_A=$headarmor_A/" person_headarmor
+sed -r -i.bac "s/headarmor_P([[:graph:]]+)/headarmor_P=$headarmor_P/" person_headarmor
+sed -r -i.bac "s/headarmor_I([[:graph:]]+)/headarmor_I=$headarmor_I/" person_headarmor
+sed -r -i.bac "s/headarmor_L([[:graph:]]+)/headarmor_L=$headarmor_L/" person_headarmor
+sed -r -i.bac "s/armor_name([[:graph:]]+)/armor_name=$armor_name/" person_armor
+sed -r -i.bac "s/armor_protekt([[:graph:]]+)/armor_protekt=$armor_protekt/" person_armor
+sed -r -i.bac "s/armor_enduranse([[:graph:]]+)/armor_enduranse=$armor_enduranse/" person_armor
+sed -r -i.bac "s/armor_S([[:graph:]]+)/armor_S=$armor_S/" person_armor
+sed -r -i.bac "s/armor_A([[:graph:]]+)/armor_A=$armor_A/" person_armor
+sed -r -i.bac "s/armor_P([[:graph:]]+)/armor_P=$armor_P/" person_armor
+sed -r -i.bac "s/armor_I([[:graph:]]+)/armor_I=$armor_I/" person_armor
+sed -r -i.bac "s/armor_L([[:graph:]]+)/armor_L=$armor_L/" person_armor
+./Market

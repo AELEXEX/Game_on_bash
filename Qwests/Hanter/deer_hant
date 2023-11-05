@@ -1,0 +1,118 @@
+#!/bin/bash
+cd ../../Person
+. ./person
+. ./person_armor
+. ./person_headarmor
+cd ../Qwests/Hanter
+clear
+cat ../../Frames/qwests/hanter/deer.txt
+echo ""
+echo -e "Вы доходите по следам до небольшой полянки\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "На поляне пасётся небольшой олень с красивыми, ветвистыми рогами\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Выберите вариант:"
+echo -e "1 - Подкрасться к оленю"
+echo -e "2 - Вернуться в город"
+read -r C
+echo -e "\033[5A"
+tput ed
+case $C in
+1)
+ echo -e "Вы подкрадываетесь к оленю\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "Внезапно у вас под ногой что-то трескается\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ clear
+ cat Frames/qwests/hanter/deer_alert.txt
+ echo -e "От этого звука олень насторожился\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "Выберите вариант:"
+ echo -e "1 - Подождать"
+ echo -e "2 - Продолжить красться"
+ read -r C
+ echo -e "\033[5A"
+ tput ed
+ case $C in
+  1)
+   echo -e "Вы ждёте, пока олень успокоится\r\c"
+   sleep 5
+   echo -e "\033[K\c"
+   clear
+   cat Frames/qwests/hanter/deer.txt
+   echo -e "Олень продолжает пастись, а вы продолжаете подкрадываться\r\c"
+   sleep 5
+   echo -e "\033[K\c"
+   echo -e "Вы подбираетесь к оленю достаточно близко, чтобы напасть\r\c"
+   sleep 5
+   echo -e "\033[K\c"
+   echo -e "Вы наподаете на оленя\r\c"
+   sleep 5
+   echo -e "\033[K\c"
+   echo -e "Вы наносите удар оленю в голову и он умирает\r\c"
+   sleep 5
+   echo -e "\033[K\c"
+   echo -e "Вы подбирате тушу оленя и идёте к охотнику\r\c"
+   sleep 5
+   echo -e "\033[K\c"
+   . ./win_retern
+  ;;
+  2)
+   echo -e "Олень как-то замечает вас и убегает\r\c"
+   sleep 5
+   echo -e "\033[K\c"
+   echo -e "Выберите вариант:"
+   echo -e "1 - Приследовать"
+   echo -e "2 - Вернуться к охотнику"
+   read -r C
+   echo -e "\033[5A"
+   tput ed
+   case $C in
+    1)
+     echo -e "Через некоторое время вы теряете след и возвращаетесь к охотнику ни с чем\r\c"
+     sleep 5
+     echo -e "\033[K\c"
+     . ./lose_retern
+    ;;
+    2)
+     echo -e "Вы возвращяетесь к охотнику ни с чем\r\c"
+     sleep 5
+     echo -e "\033[K\c"
+     . ./lose_retern
+   ;;
+   esac
+  ;;
+ esac
+;;
+2)
+ cd ../..
+ . ./Menu
+;;
+esac
+
+sed -r -i.bac "s/MOUNY([[:graph:]]+)/MOUNY=$MOUNY/" person
+sed -r -i "s/headarmor_name([[:graph:]]+)/headarmor_name=${arrmyh[0]}/" person_headarmor
+sed -r -i.bac "s/headarmor_protekt([[:graph:]]+)/headarmor_protekt=$headarmor_protekt/" person_headarmor
+sed -r -i.bac "s/headarmor_enduranse([[:graph:]]+)/headarmor_enduranse=$headarmor_enduranse/" person_headarmor
+sed -r -i.bac "s/headarmor_S([[:graph:]]+)/headarmor_S=$headarmor_S/" person_headarmor
+sed -r -i.bac "s/headarmor_A([[:graph:]]+)/headarmor_A=$headarmor_A/" person_headarmor
+sed -r -i.bac "s/headarmor_P([[:graph:]]+)/headarmor_P=$headarmor_P/" person_headarmor
+sed -r -i.bac "s/headarmor_I([[:graph:]]+)/headarmor_I=$headarmor_I/" person_headarmor
+sed -r -i.bac "s/headarmor_L([[:graph:]]+)/headarmor_L=$headarmor_L/" person_headarmor
+sed -r -i.bac "s/armor_name([[:graph:]]+)/armor_name=$armor_name/" person_armor
+sed -r -i.bac "s/armor_protekt([[:graph:]]+)/armor_protekt=$armor_protekt/" person_armor
+sed -r -i.bac "s/armor_enduranse([[:graph:]]+)/armor_enduranse=$armor_enduranse/" person_armor
+sed -r -i.bac "s/armor_S([[:graph:]]+)/armor_S=$armor_S/" person_armor
+sed -r -i.bac "s/armor_A([[:graph:]]+)/armor_A=$armor_A/" person_armor
+sed -r -i.bac "s/armor_P([[:graph:]]+)/armor_P=$armor_P/" person_armor
+sed -r -i.bac "s/armor_I([[:graph:]]+)/armor_I=$armor_I/" person_armor
+sed -r -i.bac "s/armor_L([[:graph:]]+)/armor_L=$armor_L/" person_armor
+./Market
