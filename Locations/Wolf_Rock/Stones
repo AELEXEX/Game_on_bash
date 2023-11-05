@@ -1,0 +1,54 @@
+#!/bin/bash
+cd ../../Person
+. ./person
+. ./person_weapon
+cd ../Locations/Wolf_Rock
+griphelth=5
+gripS=3
+clear
+cat ../../Frames/wolf_rock/stones.txt
+echo ""
+echo -e "Вы проходите мимо кучки камней\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы замечаете, как в этой кучке что-то поблёскивает\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo "Выберите вариант:"
+echo "1 - Осмотреть кучку камней"
+echo "2 - Пройти мимо"
+read -r C
+sleep 5
+echo -e "\033[5A"
+tput ed
+case $C in
+1)
+ echo -e "Вы осматриваете кучку камней\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ arrvar=(Зелёный_самоцвет Красный_самоцвет Синий_самоцвет Фиолетовый_самоцвет Жёлтый_самоцвет Белый_самоцвет)
+ let s=$RANDOM%6
+ echo -e "Вы находите ${arrvar[$s]}\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ f=$(grep ${arrvar[$s]} ../../Person/inventary)
+ if [[ $f == "" ]];
+ then
+  echo "${arrvar[$s]} 1" >> ../../Person/inventary
+ else
+  a=$(awk '/${arrvar[$s]}/{ print NR }' ../../Person/inventary)
+  my=`sed -n "${a}p"  ../../Person/inventary`
+  arrb=($my)
+  let arrb[1]=${arrb[1]}+1
+  d="${arrb[0]} ${arrb[1]}"
+  sed -i "${a}c\ $d" ../../Person/inventary
+ fi
+;;
+2)
+;;
+esac
+sed -r -i.bak "s/exp=([[:graph:]]+)/exp=$exp/" ../../Person/person
+sed -r -i.bak "s/MOUNY=([[:graph:]]+)/MOUNY=$MOUNY/" ../../Person/person
+sed -r -i.bak "s/helth=([[:graph:]]+)/helth=$helth/" ../../Person/person
+sed -r -i.bak "s/armor_enduranse=([[:graph:]]+)/armor_enduranse=$armor_enduranse/" ../../Person/person_armor
+sed -r -i.bak "s/weapon_enduranse=([[:graph:]]+)/weapon_enduranse=$weapon_enduranse/" ../../Person/person_weapon

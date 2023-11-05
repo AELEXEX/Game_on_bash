@@ -1,0 +1,35 @@
+#!/bin/bash
+clear
+cat ../../Frames/wolf_rock/rock.txt
+echo -e "Вы приходите к скале\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вокруг валяется множество камней, некоторые из которых поблёсктвают разными цветами\r\c"
+sleep 5
+echo -e "\033[K\c"
+RANGE=10
+variant=$RANDOM
+let "variant %= $RANGE"
+echo "$variant"
+case $(($RANDOM % 10)) in
+ 0)
+   source ./Stones;;
+ 1)
+   source ./Stones;;
+ 2)
+   source ./Stones;;
+ 3)
+   source ./Stones;;
+ 4)
+   source ./Stones;;
+ 5)
+   source ./Stones;;
+ 6)
+   source ./Stones;;
+ 7)
+   source ./Rock_Soul;;
+ 8)
+   source ./Rock_Soul;;
+ *) source ./Rock_Soul;;
+esac
+./Continue_Dangon

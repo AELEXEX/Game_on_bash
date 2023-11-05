@@ -1,0 +1,54 @@
+#!/bin/bash
+
+. ../../Person/person
+room=0
+clear
+cat ../../Frames/wolf_rock/rock.txt
+echo "Вы продолжаете гулять по поляне"
+echo "Выберите вариант"
+echo "1 - Продолжить ходить по поляне"
+echo "2 - Вернуться к охотнику"
+read -r C
+case $C in
+1)
+RANGE=10
+variant=$RANDOM
+let "variant %= $RANGE"
+echo "$variant"
+case $(($RANDOM % 10)) in
+ 0)
+   source ./Stones;;
+ 1)
+   source ./Stones;;
+ 2)
+   source ./Stones;;
+ 3)
+   source ./Stones;;
+ 4)
+   source ./Stones;;
+ 5)
+   source ./Stones;;
+ 6)
+   source ./Stones;;
+ 7)
+   source ./Rock_Soul;;
+ 8)
+   source ./Rock_Soul;;
+ *) source ./Rock_Soul;;
+esac
+;;
+2)
+ a=$(awk '/Белый_самоцвет/{ print NR }' ../../Person/inventary)
+ echo "$a"
+ my=`sed -n "${a}p"  ../../Person/inventary`
+ arrb=($my)
+ if (( ${arrb[1]} >= 10 )); then
+  cd ../../Qwests/Hanter
+  . ./win_retern
+ else
+   cd ../../Qwests/Hanter
+   . ./lose_retern
+ fi
+;;
+esac
+
