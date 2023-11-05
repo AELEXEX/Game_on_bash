@@ -1,0 +1,23 @@
+#!/bin/bash
+. ./person_weapon
+. ./person_armor
+MOUNY=
+name=
+health=90
+S=5
+A=5
+P=5
+I=5
+L=5
+let Sb=$S+$armor_S
+let Ab=$A+$armor_A
+let Pb=$P+$armor_P
+let Ib=$I+$armor_I
+let Lb=$L+$armor_L
+damage=$(( $weapon_damage + $Sb ))
+bloc=$(( $weapon_bloc + $Ab ))
+beggar_meats=0
+levev=1
+exp=0
+qwest_chein_progress=(0)
+feary=0

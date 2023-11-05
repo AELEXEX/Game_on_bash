@@ -1,0 +1,6 @@
+#!/bin/bash
+
+weapon_name=Походный_посох
+weapon_damage=5
+weapon_bloc=3
+weapon_enduranse=99955

@@ -1,0 +1,27 @@
+#!/bin/bash
+. ./person
+. ./person_weapon
+. ./person_armor
+echo "Ваше имя: $name"
+echo "Ваш бюджет: $MOUNY"
+echo "Ваше здоровье: $health"
+echo "Ваши хорактеристики:"
+echo "___________________________"
+echo "|Ваша сила: $S ($Sb)       |"
+echo "|Ваша ловкость: $A ($Ab)   |"
+echo "|Ваше восприятие: $P ($Pb) |"
+echo "|Ваш интеллект: $I ($Ib)  |"
+echo "|Ваша удача: $L ($Pb)     |"
+echo "|_________________________|"
+echo "Ваше оружие:"
+echo "|----------------------------------|"
+echo "|$weapon_name                    |"
+echo "|Его урон: $weapon_damage                       |"
+echo "|Его прочность: $weapon_enduranse               |"
+echo "|__________________________________|"
+echo "Ваша броня:"
+echo "|----------------------------------|"
+echo "|$armor_name                    |"
+echo "|Её защита: $armor_protekt                       |"
+echo "|Её прочность: $armor_enduranse               |"
+echo "|__________________________________|"

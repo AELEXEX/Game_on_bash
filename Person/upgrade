@@ -1,0 +1,25 @@
+#!/bin/bash
+
+. ./person
+clear
+echo "Вы получили уровень"
+echo "Выберите, что вы хотите улучшить"
+echo "1: Сила"
+echo "2: Ловкость"
+echo "3: Восприятие"
+echo "4: Интеллект"
+echo "5: Удача"
+read c
+case $c in
+ 1) let S=$S+1 ;;
+ 2) let A=$A+1 ;;
+ 3) let P=$P+1 ;;
+ 4) let I=$I+1 ;;
+ 5) let L=$L+1 ;;
+esac
+
+sed -r -i.bak "s/S=([[:graph:]]+)/S=$S/" person
+sed -r -i.bak "s/A=([[:graph:]]+)/A=$A/" person
+sed -r -i.bak "s/P=([[:graph:]]+)/P=$P/" person
+sed -r -i.bak "s/I=([[:graph:]]+)/I=$I/" person
+sed -r -i.bak "s/L=([[:graph:]]+)/L=$L/" person

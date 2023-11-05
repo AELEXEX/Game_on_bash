@@ -1,0 +1,5 @@
+#!/bin/bash
+
+poison_name=poison_name
+poison_caunt=0
+poison_regen=
