@@ -1,0 +1,34 @@
+#!/bin/bash
+k=0
+l=0
+declare -a dises
+declare -a dises1
+for (( i = 1; i <= 5; i++))
+do
+ let dises[$i]=($RANDOM%6)+1
+done
+for (( i = 1; i <= 5; i++))
+do
+ if [ ${dises[$i]} == 6 ]; then
+  let k=$k+1
+ fi
+done
+echo $k
+for (( i = 1; i <= 5; i++))
+do
+ let dises1[$i]=($RANDOM%6)+1
+done
+for (( i = 1; i <= 5; i++))
+do
+ if [ ${dises1[$i]} == 6 ]; then
+  let l=$l+1
+ fi
+done
+echo $l
+if [ "$k" -gt "$l" ]; then
+ echo "Вы победили"
+elif [ "$k" -lt "$l" ]; then
+ echo "Вы проиграли"
+elif [ "$k" -eq "$l" ]; then
+ echo "Ничья"
+fi
