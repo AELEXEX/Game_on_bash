@@ -1,0 +1,162 @@
+#!/bin/bash
+cd ../../Person
+. ./person
+. ./person_weapon
+cd ../Locations/Town
+echo -e "Вы гуляете по городу\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы видите двухэтажное здание в нарисованной на ней пивной кружкой\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Чтобы войти в таверну, введите ent, чтобы продолжить прогулку, введите cont\r\c"
+sleep 5
+echo -e "\033[K\c"
+read -r C
+case $C in
+ent)
+ clear
+ cat ../../Frames/tavern/enter.txt
+ echo -e "Вы входите в таверну\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "В таверне седит несколько завсегдатаев не слишком приличного вида\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "За барной стойкой стоит трактирщик, видом своим более напоминающий главаря бандитов\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "Выберите вариант:"
+ echo -e "1: Сесть за дальний столик"
+ echo -e "2: Сесть за барную стойку"
+ read -r C1
+ sleep 5
+ echo -e "\033[5A"
+ tput ed
+ case $C1 in
+  1)
+   clear
+   cat ../../Frames/tavern/far_table.txt
+   echo -e "Вы содитесь за дальний столик\r\c"
+   sleep 5
+   echo -e "\033[K\c"
+   sleep 10
+   clear
+   cat ../../Frames/tavern/witress.txt
+   echo -e "К вам подходит весма миловидная девушка\r\c"
+   sleep 5
+   echo -e "\033[K\c"
+   echo -e "Девушка: Здравствуйте, господин, вам что нибудь принести?\r\c"
+   sleep 5
+   echo -e "\033[K\c"
+   echo -e "Выберите вариант:"
+   echo -e "1: Пива, пожалуйста"
+   echo -e "2: Поесть чего-нибудь, пожалуйста"
+   read -r C2
+   sleep 5
+   echo -e "\033[K\c"
+   case $C2 in
+   1)
+    echo -e "Вы: Пива, пожалуйста\r\c"
+    sleep 5
+    echo -e "\033[K\c"
+    echo -e "Давушка: Да, конечно, подождите, пожалуйста\r\c"
+    sleep 5
+    echo -e "\033[K\c"
+    chuse=beer
+   ;;
+   2)
+    echo -e "Вы: Поесть что-нибудь, пожалуйста\r\c"
+    sleep 5
+    echo -e "\033[K\c"
+    echo -e "Давушка: Да, конечно, подождите, пожалуйста\r\c"
+    sleep 5
+    echo -e "\033[K\c"
+    chuse=food
+  ;;
+  esac
+  clear
+  case $chuse in
+  beer)
+   cat ../..Frames/tavern/witress_with_beer.txt
+  ;;
+  food)
+   cat ../../Frames/tavern/witress_with_food.txt
+  ;;
+  esac
+  echo -e "Через некоторое время девушка приносит вам ваш заказ\r\c"
+  sleep 10
+  clear
+  cat ../../Frames/tavern/gamer.txt
+  echo -e "К вам подходит один из завсегдатаев\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  echo -e "Мужик: Здаров, не против сыграть\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  echo -e "Выберите вариант:"
+   echo -e "1: Не, спасибо"
+   echo -e "2: А почему бы и нет, давай сыграем"
+   read -r C2
+   case $C2 in
+    1) echo -e "Ладно, дело твоё\r\c"
+    sleep 5
+    echo -e "\033[K\c"
+    ;;
+    2)
+     echo -e "Давай пока на интерес\r\c"
+     . ../../Minigames/dises
+   esac
+  ;;
+  2)
+   clear
+   cat ../../Frames/tavern/barmen.txt
+   echo -e "Вы садитесь за барную стойку\r\c"
+   sleep 5
+   echo -e "\033[K"
+   echo -e "Трактирщик: Чего вам, увожаемый?\r\c"
+   sleep 5
+   echo -e "\033[K"
+   echo -e "Выберите вариант:"
+   echo -e "1: Пива, пожалуйста"
+   echo -e "2: Поесть чего-нибудь, пожалуйста"
+   read -r C2
+   case $C2 in
+   1)
+    echo -e "Вы: Пива, пожалуйста\r\c"
+    echo -e "Трактирщик наливает вам пиво\r\c"
+   ;;
+   2)
+    echo -e "Вы: Поесть чего-нибудь, пожалуйста\r\c"
+    echo -e "Трактирщик: Да, сейчас на кухню крикну\r\c"
+   ;;
+   esac
+   echo -e "Трактирщик: Слушай, мужик, а ты вообще откуда?\r\c"
+   sleep 5
+   echo -e "\033[K"
+   echo -e "Вы: Путешественник я, пришёл город ваш посмотреть\r\c"
+   sleep 5
+   echo -e "\033[K"
+   echo -e "Трактирщик: Слушай, а чего ты вообще к нам в город приехал, не страшно?\r\c"
+   sleep 5
+   echo -e "\033[K"
+   echo -e "Вы: Да нет, а что такое?\r\c"
+   sleep 5
+   echo -e "\033[K"
+   echo -e "Трактирщик: Да так, в городе банда орудует, житья нет никакого\r\c"
+   sleep 5
+   echo -e "\033[K"
+   echo -e "Вы: Ну, надеюсь, меня не коснется\r\c"
+ esac
+ echo -e "Вы покидаете таверну\r\c"
+ MOUNY=$MOUNY-10
+ sed -r -i.bac 's/MOUNY([[:graph:]]+)/MOUNY=$MOUNY/' ../../Person/person
+ cd ../..
+ . ./Menu
+ ;;
+cont)
+ cd ../..
+ . ./Menu
+;;
+esac
+

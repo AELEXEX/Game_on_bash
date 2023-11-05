@@ -1,0 +1,51 @@
+#!/bin/bash
+cd ../../Person
+. ./person
+. ./person_weapon
+cd ../Locations/Town
+clear
+cat ../../Frames/beggar/street.txt
+echo -e "Вы гуляете по городу\r\c"
+sleep 5
+echo -e "\033[K"
+echo -e "Внезапно вы слышите голос\r\c"
+sleep 5
+echo -e "\033[K"
+echo -e "Голос: Эй, увожаемый, манетку не поткинешь?\r\c"
+sleep 5
+echo -e "\033[K"
+echo -e "Вы поворачиваете голову.\r\c"
+sleep 5
+echo -e "\033[K"
+clear
+cat ../../Frames/beggar/beggar.txt
+echo -e "В подворотне, мимо которой вы проходите, у стеночки сидит нищий\r\c"
+sleep 5
+echo -e "\033[K"
+echo -e "Чтобы дать милостыню, введите giw, чтобы при этом спросить о слухах, введите ask, чтобы продолжить прогулку, введите cont"
+read -r C
+sleep 5
+echo -e "\033[3A"
+tput ed
+case $C in
+giw)
+ echo -e "Вы: Держи, болезный\r\c"
+ sleep 5
+ echo -e "\033[K"
+ let MOUNY=$MOUNY-1 ;;
+ask)
+ echo -e "Вы: А что ты мне рассказать можешь, может, слухи какие-нибудь у вас по городу ходят\r\c"
+ sleep 5
+ echo -e "\033[K"
+ echo -e "Нищий: От чего же не рассказать, слушай"
+ let beggar_meats=$beggar_meats+1
+ cat Tails/Beggar_$beggar_meats
+ sed -r -i.bak "s/beggar_meats=([[:graph:]]+)/beggar_meats=$beggar_meats/" ../../Person/person
+ cat Tails/Beggar_$beggar_meats
+;;
+*)
+ echo -e "Вы игнорируете нищего и гуляете дальше"
+esac
+sed -r -i.bak "s/MOUNY=([[:graph:]]+)/MOUNY=$MOUNY/" ../../Person/person
+cd ../..
+. ./Menu

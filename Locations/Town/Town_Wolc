@@ -1,0 +1,30 @@
+#!/bin/bash
+
+echo "Вы решаете пройтись по городу и как следует осмотреться"
+RANGE=10
+variant=$RANDOM
+let "variant %= $RANGE"
+echo "$variant"
+case $(($RANDOM % 10)) in
+ 0)
+   source ./Beggar;;
+ 1)
+   source ./Beggar;;
+ 2)
+   source ./Baggar;;
+ 3)
+   source ./Tavern;;
+ 4)
+   source ./Tavern;;
+ 5)
+   source ./Plate;;
+ 6)
+   source ./Plate;;
+ 7)
+   source ./Market;;
+ 8)
+   source ./Market;;
+ *) source ./Market;;
+esac
+cd ../..
+. ./Menu

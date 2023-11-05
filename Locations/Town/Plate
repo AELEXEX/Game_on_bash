@@ -1,0 +1,96 @@
+#!/bin/bash
+
+clear
+cat ../../Frames/plate/plate.txt
+echo ""
+echo -e "Вы гуляете по городу\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы выходите на площадь города\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "По середине площади стоит статуя девушки с кувшином\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "выберите вариант:"
+echo -e "1 - Подойти к статуе"
+echo -e "2 - Продолжить прогулку по городу"
+read -r C
+sleep 5
+echo -e "\033[5A"
+tput ed
+case $C in
+1)
+ clear
+ cat ../../Frames/plate/statue.txt
+ echo ""
+ echo -e "Вы подходите к статуе\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "На пастаменте статуи находится табличка\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "выберите вариант:"
+ echo -e "1 - Прочитать"
+ echo -e "2 - Уйти"
+ read -r C
+ sleep 5
+ echo -e "\033[5A"
+ tput ed
+ case $C in
+ 1)
+  echo -e "Надпись: Та, кто приносит дождь\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  echo -e "Вы: Интересно, и к чему тут эта статуя?\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  echo -e "Голос: О вы нащей статуей заинтересовалась?\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  clear
+  cat ../../Frames/plate/prist.txt
+  echo ""
+  echo -e "Вы оборачиваетесь\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  echo -e "Перед вами стоит плотный мужичёк в белой тоге\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  echo -e "выберите вариант:"
+  echo -e "1 - Да нет, не очень"
+  echo -e "2 - Ну да, итересно, и непонятно, к чему тут это"
+  read -r C
+  sleep 5
+  echo -e "\033[5A"
+  tput ed
+  case $C in
+   1)
+    echo -e "Вы: Да нет, не очень\r\c"
+    sleep 5
+    echo -e "\033[K\c"
+    echo -e "Мужик: Ну ладно, бывай тогда, долгих лет жизни тебе\r\c"
+    sleep 5
+    echo -e "\033[K\c"
+   ;;
+   2)
+    echo -e "Вы: Ну да, интересно, и непонятно, к чему тут это\r\c"
+    sleep 5
+    echo -e "\033[K\c"
+    echo -e "Мужик:"
+    cat ../../Tails/Sculpture
+   ;;
+  esac
+ ;;
+ 2)
+  echo -e "Вы уходите\r\c"
+  cd ../..
+  . ./Menu
+ esac
+;;
+2)
+ echo -e "Вы ещё немного посмотрели на статую и ужли с площади\r\c"
+ cd ../..
+ . ./Menu
+;;
+esac

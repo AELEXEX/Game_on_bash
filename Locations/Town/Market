@@ -1,0 +1,30 @@
+#!/bin/bash
+clear
+cat ../../Frames/market/market.txt
+echo ""
+echo "Вы выходите на рынок"
+echo "Выберите вариант:"
+echo "1 - Отправиться искать оружейника"
+echo "2 - Отправиться искать бронника"
+echo "3 - Отправиться искать алхимика"
+echo "4 - Продолжить гулять по городу"
+read -r C
+case $C in
+1)
+cd ../../Traders
+. ./weaponshop
+;;
+2)
+cd ../../Traders
+. ./armorshop
+;;
+3)
+cd ../../Traders
+. ./poisonshop
+;;
+4)
+cd ../..
+. /Menu
+;;
+esac
+
