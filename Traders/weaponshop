@@ -1,0 +1,60 @@
+#!/bin/bash
+cd ../Person
+. ./person
+. ./person_weapon
+cd ../Traders
+clear
+cat Frames/market/trades/weaponshop.txt
+echo -e "Вы находите лавку оружейника\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "За прилавком сидит невысокий бородатый дядька приблизительно квадратного телосложения\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Продавец: Чё пришёл?\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы: Да вот, хотел на оружие посмотреть\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Продавец: Ну вот, смотри *обводит рукой зал*\r\c"
+cat ./Tread_Prises/weapon
+echo -e "Продавец: Ну, ты брать что-нибудь будешь\r\c"
+echo "Выберите вариант:"
+echo "1 - Да"
+echo "2 - Нет"
+read -r C
+case $C in
+1)
+ echo -e "Вы: Да, буду"
+ echo -e "Продавец: Чё брать будеш?"
+ read -r b
+ clear
+ cat Frames/market/traders/weaponshop.txt
+ my=`sed -n "${b}p" ./Goods/weapon `
+ echo $my
+ arrmyh=($my)
+ if [ "${arrmyh[1]}" -le "$MOUNY" ]; then
+  echo "${arrmyh[0]}"
+  weapon_name=${arrmyh[0]}
+  weapon_damage=${arrmyh[2]}
+  weapon_enduranse=${arrmyh[3]}
+  let MOUNY=$MOUNY-${arrmyh[1]}
+ else
+  echo -e "Мне не хватает денег\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+ fi
+;;
+2)
+ echo "Вы: Нет, ничего не буду"
+ sleep 5
+ echo -e "\033[K\c"
+;;
+echo "Продавец: Приходите ещё"
+sed -r -i.bac "s/MOUNY([[:graph:]]+)/MOUNY=$MOUNY/" ../Person/person
+sed -r -i "s/weapon_name([[:graph:]]+)/weapon_name=${arrmyh[0]}/" ../Person/person_weapon
+sed -r -i.bac "s/weapon_damage([[:graph:]]+)/weapon_damage=$weapon_damage/" ../Person/person_weapon
+sed -r -i.bac "s/weapon_enduranse([[:graph:]]+)/weapon_enduranse=$weapon_enduranse/" ../Person/person_weapon
+cd ../Locations/Town
+./Market

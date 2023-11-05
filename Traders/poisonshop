@@ -1,0 +1,68 @@
+#!/bin/bash
+
+
+. ../Person/person
+. ../Person/person_poison
+clear
+cat ../Frames/market/trades/poisonshop.txt 
+echo -e "Вы находите лавку алхимика\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "За прилавком сидит худощавая девушка болезненного вида\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Продавец: Здравствуйте, господин, чего желате?\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы: Да вот, хотел зелье посмотреть\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Продавец: Вот, смотрите *выкладывает на прилавок несколько флаконов*\r\c"
+sleep 5
+echo -e "\033[K\c"
+cat ../Tread_Prises/poison
+echo -e "Продавец: Будите что-нибудь брать"
+echo -e "Выберите вариант:"
+echo -e "1 - Да"
+echo -e "2 - Нет"
+read -r C
+case $C in
+1)
+ echo -e "Вы: Да, буду"
+ echo -e "Продавец: Чего изволите?"
+ read -r b
+ clear
+ cat Frames/market/traders/poisonshop.txt
+ my=`sed -n "${b}p" ./Goods/poison `
+ echo -e $my
+ arrmyh=($my)
+ echo -e "Сколько вам нужно?"
+ read -r count
+ clear
+ cat ../Frames/market/traders/poisonshop.txt
+ let prise=${arrmyh[1]}*count
+ if [ "prise" -le "$MOUNY" ]; then
+  echo -e "${arrmyh[0]}"
+  poison_name=${arrmyh[0]}
+  poison_regen=${arrmyh[2]}
+  let poison_caunt=$poison_caunt+count
+  let MOUNY=$MOUNY-prise
+ else
+  echo -e "Мне не хватает денег\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+ fi
+;;
+2)
+ echo -e "Вы: Нет, ничего не буду\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+;;
+esac
+echo "Продавец: Приходите ещё"
+sed -r -i.bac "s/MOUNY([[:graph:]]+)/MOUNY=$MOUNY/" ../Person/person
+sed -r -i "s/poison_name([[:graph:]]+)/poison_name=poison_name/" ../Person/person_poison
+sed -r -i.bac "s/poison_regen([[:graph:]]+)/poison_regen=$poison_regen/" ../Person/person_poison
+sed -r -i.bac "s/poison_caunt([[:graph:]]+)/poison_caunt=$poison_caunt/" ../Person/person_poison
+cd ../Locations/Town
+. ./Market

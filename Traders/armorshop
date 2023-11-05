@@ -1,0 +1,140 @@
+#!/bin/bash
+
+. ../Person/person
+. ../Person/person_armor
+. ../Person/person_headarmor
+clear
+cat ../Frames/market/trades/armorshop.txt
+echo ""
+echo -e "Вы находите лавку бронника\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "За прилавком сидит давольно крупный мужик со шрамами на руках\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Продавец: Здаров, увожаемый, чего пришёл?\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы: Да вот, хотел на броню посмотреть\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Продавец: А что тебя интересует, шлемы или нагрудники?\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Выберите вариант:"
+echo -e "1 - Шлемы"
+echo -e "2 - Нагрудники"
+read -r C
+echo -e "\033[5A"
+tput ed
+case $C in
+1)
+ echo -e "Вы: Шлемы\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "Продавец: Ну вот, смотри\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ cat ../Tread_Prises/headarmor
+ echo -e "Продавец: Будешь что-нибудь брать"
+ echo -e "Выберите вариант:"
+ echo -e "1 - Да"
+ echo -e "2 - Нет"
+ read -r C1
+ case $C1 in
+ 1)
+  echo -e "Вы: Да, буду\r\c"
+  echo -e "Продавец: Что будешь брать?"
+  read -r b
+  my=`sed -n "${b}p" ../Goods/headarmor `
+  clear
+  cat ../Frames/market/traders/armorshop.txt
+  arrmyh=($my)
+  if [ "${arrmyh[1]}" -le "$MOUNY" ]; then
+   echo -e "${arrmyh[0]}"
+   headarmor_name=${arrmyh[0]}
+   headarmor_protekt=${arrmyh[2]}
+   headarmor_enduranse=${arrmyh[3]}
+   headarmor_S=${arrmyh[6]}
+   headarmor_A=${arrmyh[7]}
+   headarmor_P=${arrmyh[8]}
+   headarmor_I=${arrmyh[9]}
+   headarmor_L=${arrmyh[10]}
+   let MOUNY=$MOUNY-${arrmyh[1]}
+  else
+   echo -e "Мне не хватает денег\r\c"
+   sleep 5
+   echo -e "\033[K\c"
+  fi
+ ;;
+ 2)
+  echo -e "Вы: Нет, спасибо\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+ ;;
+ esac
+;;
+2)
+ echo -e "Вы: Броня\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "Продавец: Ну вот, смотри"
+ sleep 5
+ echo -e "\033[K\c"
+ cat ./Tread_Prises/armor
+ echo -e "Продавец: Будешь что-нибудь брать\r\c"
+ echo -e "Выберите вариант:"
+ echo -e "1 - Да"
+ echo -e "2 - Нет"
+ read -r C2
+ case $C2 in
+ 1)
+  echo -e "Вы: Да, буду\r\c"
+  echo -e "Продавец: Что будешь брать?\r\c"
+  read -r b
+  clear
+  cat ../Frames/market/traders/armorshop.txt
+  echo ""
+  my=`sed -n "${b}p" ../Goods/armor `
+  echo -e $my
+  arrmy=($my)
+  if [ "${arrmy[1]}" -le "$MOUNY" ]; then
+   armor_name=${arrmy[0]}
+   armor_protekt=${arrmy[2]}
+   armor_enduranse=${arrmy[3]}
+   armor_S=${arrmy[6]}
+   armor_A=${arrmy[7]}
+   armor_P=${arrmy[8]}
+   armor_I=${arrmy[9]}
+   armor_L=${arrmy[10]}
+   let MOUNY=$MOUNY-${arrmy[1]}
+  else
+   echo -e "Мне не хватает денег\r\c"
+  fi
+ ;;
+ 2)
+  echo -e "Вы: Нет, спасибо\r\c"
+ ;;
+ esac
+;;
+esac
+echo -e "Продавец: Приходите ещё\r\c"
+sed -r -i.bac "s/MOUNY([[:graph:]]+)/MOUNY=$MOUNY/" ../Person/person
+sed -r -i "s/headarmor_name([[:graph:]]+)/headarmor_name=${arrmyh[0]}/" ../Person/person_headarmor
+sed -r -i.bac "s/headarmor_protekt([[:graph:]]+)/headarmor_protekt=$headarmor_protekt/" ../Person/person_headarmor
+sed -r -i.bac "s/headarmor_enduranse([[:graph:]]+)/headarmor_enduranse=$headarmor_enduranse/" ../Person/person_headarmor
+sed -r -i.bac "s/headarmor_S([[:graph:]]+)/headarmor_S=$headarmor_S/" ../Person/person_headarmor
+sed -r -i.bac "s/headarmor_A([[:graph:]]+)/headarmor_A=$headarmor_A/" ../Person/person_headarmor
+sed -r -i.bac "s/headarmor_P([[:graph:]]+)/headarmor_P=$headarmor_P/" ../Person/person_headarmor
+sed -r -i.bac "s/headarmor_I([[:graph:]]+)/headarmor_I=$headarmor_I/" ../Person/person_headarmor
+sed -r -i.bac "s/headarmor_L([[:graph:]]+)/headarmor_L=$headarmor_L/" ../Person/person_headarmor
+sed -r -i.bac "s/armor_name([[:graph:]]+)/armor_name=$armor_name/" ../Person/person_armor
+sed -r -i.bac "s/armor_protekt([[:graph:]]+)/armor_protekt=$armor_protekt/" ../Person/person_armor
+sed -r -i.bac "s/armor_enduranse([[:graph:]]+)/armor_enduranse=$armor_enduranse/" ../Person/person_armor
+sed -r -i.bac "s/armor_S([[:graph:]]+)/armor_S=$armor_S/" ../Person/person_armor
+sed -r -i.bac "s/armor_A([[:graph:]]+)/armor_A=$armor_A/" ../Person/person_armor
+sed -r -i.bac "s/armor_P([[:graph:]]+)/armor_P=$armor_P/" ../Person/person_armor
+sed -r -i.bac "s/armor_I([[:graph:]]+)/armor_I=$armor_I/" ../Person/person_armor
+sed -r -i.bac "s/armor_L([[:graph:]]+)/armor_L=$armor_L/" ../Person/person_armor
+cd ../Locations/Town
+. ./Market
