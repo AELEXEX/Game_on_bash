@@ -1,0 +1,20 @@
+#!/bin/bash
+. ../../Person/person
+. ../../Person/person_weapon
+clear
+cat ../../Frames/dangon/chest.txt
+echo -e "Вы входите в комнату\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "В комнате в углу стоит сундук\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы открываете сундук\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы получили 50 монет\r\c"
+sleep 5
+echo -e "\033[K\c"
+let MOUNY=$MOUNY+50
+sed -r -i.bak "s/MOUNY=([[:graph:]]+)/MOUNY=$MOUNY/" ../../Person/person
+. ./Continue_Dangon

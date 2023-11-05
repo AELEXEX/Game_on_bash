@@ -1,0 +1,115 @@
+#!/bin/bash
+cd ..
+cd ..
+cd Person
+. ./person
+cd ..
+cd Locations/Dangon
+slimehelth=10
+slimeS=5
+clear
+cat ../../Frames/dangon/slime.txt
+echo -e "Вы входите в комнату\r\c"
+sleep 5
+echo -e "\033[K"
+echo -e "В комнате вы видите ползующего по комнате слизня\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы вступаете в бой со слизнем\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Слизень бросается на вас\r\c"
+sleep 5
+echo -e "\033[K\c"
+  a=$RANDOM
+  let "a %= 2"
+  if [ $a -eq 1 ];
+   then
+    echo -e "Слизень попадает по вам\r\c"
+    sleep 5
+    echo -e "\033[K\c"
+    let health=$health-5
+    let armor_enduranse=$armor_enduranse-5
+   else
+    echo -e "Слизень не попадает по вам\r\c"
+    sleep 5
+    echo -e "\033[K\c"
+  fi
+while [ $slimehelth -gt 0 ]
+ do
+  echo -e "Выберите вариант:"
+  echo -e "1 - Нанести удар"
+  echo -e "2 - Заблокировать удар"
+  read -r C
+  echo -e "\033[5A"
+  sleep 5
+  tput ed
+  case $C in
+  1)
+  echo -e "Вы наносите удар по слизню\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  a=$RANDOM
+  let "a %= 2"
+  if [ $a -eq 1 ];
+   then
+    echo -e "Вы попадаете по слизню\r\c"
+    sleep 5
+    echo -e "\033[K\c"
+    let slimehelth=$slimehelth-$damage
+    let weapon_enduranse=$weapon_enduranse-5
+   else
+    echo -e "Вы не попадаете по слизню\r\c"
+    sleep 5
+    echo -e "\033[K\c"
+  fi
+  ;;
+  2)
+   echo -e "Вы блокируете удар\r\c"
+   sleep 5
+    echo -e "\033[K\c"
+   bloc_stand=1
+  ;;
+  esac
+  a=$RANDOM
+  let "a %= 2"
+  if [ $a -eq 1 ];
+   then
+    if [[ $bloc_stand -eq 1 && $bloc > $slimeS ]] ;  then
+      echo -e "Вы блокируете удар\r\c"
+      sleep 5
+      echo -e "\033[K\c"
+    elif [[ $bloc_stand -eq 1 && $bloc > $slimeS ]]; then
+     echo -e "Слизень пробивает ваш блок\r\c"
+     sleep 5
+     echo -e "\033[K\c"
+     let health=$health-5
+     let armor_enduranse=$armor_enduranse-5
+    else
+      echo -e "Слизень попадает по вам\r\c"
+      sleep 5
+      echo -e "\033[K\c"
+      let health=$health-5
+      let armor_enduranse=$armor_enduranse-5
+      sed -r -i.bak "s/helth=([[:graph:]]+)/helth=$helth/" person
+    fi
+   else
+    echo -e "Слизень не попадает по вам\r\c"
+    sleep 5
+    echo -e "\033[K\c"
+  fi
+ done
+echo -e "Вы победили слизня\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы получили 5 монет\r\c"
+sleep 5
+echo -e "\033[K\c"
+let MOUNY=$MOUNY+5
+let exp=$exp+5
+sed -r -i.bak "s/exp=([[:graph:]]+)/exp=$exp/" ../../Person/person
+sed -r -i.bak "s/MOUNY=([[:graph:]]+)/MOUNY=$MOUNY/" ../../Person/person
+sed -r -i.bak "s/health=([[:graph:]]+)/health=$health/" ../../Person/person
+sed -r -i.bak "s/armor_enduranse=([[:graph:]]+)/armor_enduranse=$armor_enduranse/" ../../Person/person_armor
+sed -r -i.bak "s/weapon_enduranse=([[:graph:]]+)/weapon_enduranse=$weapon_enduranse/" ../../Person/person_weapon
+. ./Continue_Dangon

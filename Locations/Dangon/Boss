@@ -1,0 +1,68 @@
+#!/bin/bash
+. ./person
+. ./person_weapon
+bosshelth=100
+bossS=15
+echo "Вы входите в комнату"
+echo "В комнате вы видите стоящего без дела скилета"
+echo "Скилет выглядит очень странно, он больше обычного, у него длиннее руки и несколько голов"
+echo "Вы вступаете в бой со скилетом"
+  echo "Скилет бросается на вас"
+  a=$RANDOM
+  let "a %= 2"
+  if [ $a -eq 1 ];
+   then
+    echo "Скилет попадает по вам"
+    let health="$health-(20-$armor_protekt)"
+    sed -r -i.bak "s/helth=([[:graph:]]+)/helth=$helth/" person
+   else
+    echo "Скилет не попадает по вам"
+  fi
+while [ $bosshelth -gt 0 ]
+ do
+  echo "Выберите вариант:"
+  echo "1 - Нанести удар"
+  echo "2 - Заблокировать удар"
+  read -r C
+  case $C in
+  1)
+  echo "Вы наносите удар по скилету"
+  a=$RANDOM
+  let "a %= 2"
+  if [ $a -eq 1 ];
+   then
+    echo "Вы попадаете по скилету"
+    let bosshelth=$bosshelth-$damage
+   else
+    echo "Вы не попадаете по скилету"
+  fi
+  ;;
+  2)
+   echo "Вы блокируете удар"
+   bloc_stand=1
+  ;;
+  esac
+  echo "Скилет бросается на вас"
+  a=$RANDOM
+  let "a %= 2"
+  if [ $a -eq 1 ];
+   then
+     if [[ $bloc_stand -eq 1 && $bloc > $bossS ]] ;  then
+      echo "Вы блокируете удар"
+    elif [[ $bloc_stand -eq 1 && $bloc > $bossS ]]; then
+     echo "Скилет пробивает ваш блок"
+     let health="$health-(20-$armor_protekt)"
+    else
+      echo "Скилет попадает по вам"
+      let health="$health-(20-$armor_protekt)"
+      sed -r -i.bak "s/helth=([[:graph:]]+)/helth=$helth/" person
+    fi
+   else
+    echo "Скилет не попадает по вам"
+  fi
+ done
+echo "Вы победили скилета"
+echo "Вы получили 10 монет"
+let MOUNY=$MOUNY+100
+sed -r -i.bak "s/MOUNY=([[:graph:]]+)/MOUNY=$MOUNY/" person
+sed -r -i.bak "s/helth=([[:graph:]]+)/helth=$helth/" person

@@ -1,0 +1,116 @@
+#!/bin/bash
+cd ../../Person
+. ./person
+. ./person_weapon
+cd ../Locations/Dangon
+skillethelth=20
+skilletS=15
+clear
+cat ../../dangon/Frames/skilet.txt
+echo -e "Вы входите в комнату\r"
+sleep 5
+echo -e "\033[K\c"
+echo -e "В комнате вы видите стоящего без дела скелета\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы вступаете в бой со скелетом\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Скелет бросается на вас\r\c"
+sleep 5
+echo -e "\033[K\c" 
+ a=$RANDOM
+  let "a %= 2"
+  if [ $a -eq 1 ];
+   then
+    echo -e "Скелет попадает по вам\r\c"
+    sleep 5
+    echo -e "\033[K\c"
+    let health=$health-10
+    let armor_enduranse=$armor_enduranse-10
+    sed -r -i.bak "s/helth=([[:graph:]]+)/helth=$helth/" person
+   else
+    echo -e "Скелет не попадает по вам\r\c"
+    sleep 5
+    echo -e "\033[K\c"
+  fi
+while [ $skillethelth -gt 0 ]
+ do
+  echo -e "Выберите вариант:"
+  echo -e "1 - Нанести удар"
+  echo -e "2 - Заблокировать удар"
+  read -r C
+  sleep 5
+  echo -e "\033[5A"
+  tput ed
+  case $C in
+  1)
+  echo -e "Вы наносите удар по скелету\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  a=$RANDOM
+  let "a %= 2"
+  if [ $a -eq 1 ];
+   then
+    echo -e "Вы попадаете по скелету\r\c"
+    sleep 5
+    echo -e "\033[K\c"
+    let skillethelth=$skillethelth-$damage
+    let weapon_enduranse=$weapon_enduranse-10
+   else
+    echo -e "Вы не попадаете по скелету\r\c"
+    sleep 5
+    echo -e "\033[K\c"
+  fi
+  ;;
+  2)
+   echo -e "Вы блокируете удар\r\c"
+   sleep 5
+   echo -e "\033[K\c"
+   bloc_stand=1
+  ;;
+  esac
+  echo -e "Скелет бросается на вас\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  a=$RANDOM
+  let "a %= 2"
+  if [ $a -eq 1 ];
+   then
+     if [[ $bloc_stand -eq 1 && $bloc > $skilletS ]] ;  then
+      echo -e "Вы блокируете удар\r\c"
+      sleep 5
+      echo -e "\033[K\c"
+    elif [[ $bloc_stand -eq 1 && $bloc > $skilletS ]]; then
+     echo -e "Скелет пробивает ваш блок\r\c"
+     sleep 5
+     echo -e "\033[K\c"
+     let health=$health-10
+     let armor_enduranse=$armor_enduranse-10
+    else
+      echo -e "Скелет попадает по вам\r\c"
+      sleep 5
+      echo -e "\033[K\c"
+      let health=$health-10
+      let armor_enduranse=$armor_enduranse-10
+      sed -r -i.bak "s/helth=([[:graph:]]+)/helth=$helth/" person
+    fi
+   else
+    echo -e "Скелет не попадает по вам\r\c"
+    sleep 5
+    echo -e "\033[K\c"
+  fi
+ done
+echo -e "Вы победили скелета\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы получили 10 монет\r\c"
+sleep 5
+echo -e "\033[K\c"
+let MOUNY=$MOUNY+10
+let exp=$exp+10
+sed -r -i.bak "s/exp=([[:graph:]]+)/exp=$exp/" ../../Person/person
+sed -r -i.bak "s/MOUNY=([[:graph:]]+)/MOUNY=$MOUNY/" ../../Person/person
+sed -r -i.bak "s/helth=([[:graph:]]+)/helth=$helth/" ../../Person/person
+sed -r -i.bak "s/armor_enduranse=([[:graph:]]+)/armor_enduranse=$armor_enduranse/" ../../Person/person_armor
+sed -r -i.bak "s/weapon_enduranse=([[:graph:]]+)/weapon_enduranse=$weapon_enduranse/" ../../Person/person_weapon

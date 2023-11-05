@@ -1,0 +1,12 @@
+#!/bin/bash
+. ./person
+. ./person_weapon
+clear
+cat ../../Frames/dangon/void.txt
+echo -e "Вы входите в комнату\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Комната оказалась пустой\r\c"
+sleep 5
+echo -e "\033[K\c"
+./Continue_Dangon

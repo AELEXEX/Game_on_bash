@@ -1,0 +1,112 @@
+#!/bin/bash
+cd ../../Person
+. ./person
+. ./person_weapon
+cd ../Locations/Dangon
+clear
+cat ../../Frames/dangon/bat.txt
+bathelth=5
+batS=5
+echo ""
+echo -e "Вы входите в комнату\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "В комнате вы видите висящую под потолком летучую мышь\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы вступаете в бой с летучей мышью\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Летучая мышь бросается на вас\r\c"
+sleep 5
+echo -e "\033[K\c"
+a=$RANDOM
+let "a %= 2"
+if [ $a -eq 1 ];
+ then
+  echo -e "Летучая мышь попадает по вам\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  let helth=$helth-5
+ else
+  echo -e "Летучая мышь не попадает по вам\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+fi
+while (( $bathelth > 0 ))
+ do
+  echo -e "Выберите вариант:"
+  echo -e "1 - Нанести удар"
+  echo -e "2 - Заблокировать удар"
+  read -r C
+  echo -e "\033[5A"
+  sleep 5
+  tput ed
+  case $C in
+  1)
+  echo -e "Вы наносите удар по летучей мыши\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  a=$RANDOM
+  let "a %= 2"
+  if [ $a -eq 1 ];
+   then
+    echo -e "Вы попадаете по летучей мыши\r\c"
+    sleep 5
+    echo -e "\033[K\c"
+    let bathelth=$bathelth-$damage
+    let weapon_enduranse=$weapon_enduranse-4
+   else
+    echo -e "Вы не попадаете по летучей мыши\r\c"
+    sleep 5
+    echo -e "\033[K\c"
+  fi
+  ;;
+  2)
+   echo -e "Вы блокируете удар\r"
+   bloc_stand=1
+  ;;
+  esac
+  a=$RANDOM
+  let "a %= 2"
+  if [ $a -eq 1 ];
+   then
+    if [[ $bloc_stand -eq 1 && $bloc > $batS ]] ;  then
+      echo -e "Вы блокируете удар\r\c"
+      sleep 5
+      echo -e "\033[K\c"
+    elif [[ $bloc_stand -eq 1 && $bloc > $batS ]]; then
+     echo -e "Летучая мышь пробивает ваш блок\r\c"
+     sleep 5
+     echo -e "\033[K\c"
+     let health=$health-5
+     let armor_enduranse=$armor_enduranse-5
+    else
+      echo -e "Летучая мышь попадает по вам\r\c"
+      sleep 5
+      echo -e "\033[K\c"
+      let health=$health-5
+      let armor_enduranse=$armor_enduranse-5
+      sed -r -i.bak "s/helth=([[:graph:]]+)/helth=$helth/" person
+    fi
+   else
+    echo -e "Летучая мышь  не попадает по вам\r\c"
+    sleep 5
+    echo -e "\033[K\c"
+  fi
+ bloc_stand=0
+ echo -e $bathelth
+ done
+echo -e "Вы победили летучую мышь\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы получили 3 монеты\r\c"
+sleep 5
+echo -e "\033[K\c"
+let MOUNY=$MOUNY+3
+let exp=$exp+3
+sed -r -i.bak "s/exp=([[:graph:]]+)/exp=$exp/" person
+sed -r -i.bak "s/MOUNY=([[:graph:]]+)/MOUNY=$MOUNY/" person
+sed -r -i.bak "s/helth=([[:graph:]]+)/helth=$helth/" person
+sed -r -i.bak "s/armor_enduranse=([[:graph:]]+)/armor_enduranse=$armor_enduranse/" person_armor
+sed -r -i.bak "s/weapon_enduranse=([[:graph:]]+)/weapon_enduranse=$weapon_enduranse/" person_weapon

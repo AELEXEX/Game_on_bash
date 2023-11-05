@@ -1,0 +1,41 @@
+#!/bin/bash
+clear
+cat ../../Frames/dangon/dangon.txt
+echo -e "Вы подходите ко входу в подземелье\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вход выглядит достаточно древним, но при этом очень красивым и очень неплохо сохранившимся\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы входите в подземелье. Внутри удивительно сухо и тепло.\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы входите в одну из комнат\r\c"
+sleep 5
+echo -e "\033[K\c"
+RANGE=10
+variant=$RANDOM
+let "variant %= $RANGE"
+echo "$variant"
+case $(($RANDOM % 10)) in
+ 0)
+   source ./Void;;
+ 1)
+   source ./Void;;
+ 2)
+   source ./Void;;
+ 3)
+   source ./Chest;;
+ 4)
+   source ./Chest;;
+ 5)
+   source ./Slime;;
+ 6)
+   source ./Slime;;
+ 7)
+   source ./Bat;;
+ 8)
+   source ./Bat;;
+ *) source ./Skillet;;
+esac
+./Continue_Dangon
