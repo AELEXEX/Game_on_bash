@@ -129,7 +129,8 @@ case $C in
     sleep 5
     echo -e "\033[K\c"
     let feary=$feary+1
-    sed -r -i.bac 's/feary([[:graph:]]+)/feary=$feary/' Person/person
+    sed -r -i.bac 's/feary([[:graph:]]+)/feary=$feary/' ../../Person/person
+    . ./win_of_qwest
    ;;
    2)
     echo -e "Вы: Не, звиняй, конечно, но у меня не получится тебя с собой взять\r\c"
@@ -144,6 +145,7 @@ case $C in
     echo -e "Вы подхватываете деревце и идёте к охотнику\r\c"
     sleep 5
     echo -e "\033[K\c"
+    . ./win_of_qwest
    ;;
   ;;
   2)
