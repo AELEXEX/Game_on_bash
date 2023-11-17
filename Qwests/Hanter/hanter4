@@ -5,7 +5,7 @@ cd ../../Person
 . ./person_headarmor
 cd ../Qwests/Hanter
 clear
-cat ../../Frames/market/qwests/hanter/hanter.txt
+cat ../../Frames/qwests/hanter/hanter.txt
 echo ""
 echo -e "Вы просыпаетесь\r\c"
 sleep 5
@@ -54,7 +54,7 @@ case $C in
  echo -e "Охотник: Хорошо, жду\r\c"
  sleep 5
  echo -e "\033[K\c"
- . ./riwer1
+ . ./magic_forest
 ;;
 2)
  echo -e "Вы: Не, как нибудь в другой раз\r\c"
