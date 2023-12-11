@@ -1,0 +1,41 @@
+#!/bin/bash
+clear
+cat ../../Frames/collector/collector.txt
+echo -e "Вы подходите ко входу в подземелье\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вход выглядит достаточно древним, но при этом очень красивым и очень неплохо сохранившимся\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы входите в подземелье. Внутри удивительно сухо и тепло.\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы входите в одну из комнат\r\c"
+sleep 5
+echo -e "\033[K\c"
+RANGE=10
+variant=$RANDOM
+let "variant %= $RANGE"
+echo "$variant"
+case $(($RANDOM % 10)) in
+ 0)
+   source ./Rat;;
+ 1)
+   source ./Rat;;
+ 2)
+   source ./Rat;;
+ 3)
+   source ./Rat;;
+ 4)
+   source ./Rat;;
+ 5)
+   source ./Rat;;
+ 6)
+   source ./Rat;;
+ 7)
+   source ./Rat;;
+ 8)
+   source ./Rat;;
+ *) source ./Ritual_Plase;;
+esac
+./Continue_Collector

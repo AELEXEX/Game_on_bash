@@ -1,0 +1,56 @@
+#!/bin/bash
+
+. ../../Person/person
+room=0
+clear
+cat ../../Frames/collector/collector.txt
+while true
+echo "Вы закочили с комнатой\r\s"
+echo "Чтобы покинуть подземелье, введите stop, чтобы пройти дальше, введите next, чтобы посмотреть состояние персона, введите viperson"
+do
+read c
+if [ $c == next ]; then
+ let count_of_exp=5^$level
+ if [ $count_of_exp < $exp ]; then
+  if [ $room > 10 ]; then
+	echo "Вы входите в одну из комнат"
+	RANGE=10
+	variant=$RANDOM
+	let "variant %= $RANGE"
+	echo "$variant"
+	case $(($RANDOM % 10)) in
+	 0)
+	   source ./Void;;
+	 1)
+	   source ./Void;;
+	 2)
+	   source ./Void;;
+	 3)
+	   source ./Chest;;
+	 4)
+	   source ./Chest;;
+	 5)
+	   source ./Slime;;
+	 6)
+	   source ./Slime;;
+	 7)
+	   source ./Bat;;
+	 8)
+	   source ./Bat;;
+	 *) source ./Skillet;;
+	esac
+  else 
+  . ./Boss
+  fi
+ else 
+  . ../../Person/upgrade
+ fi
+elif [ $c == viperson ]; then
+ source ../../Person/viperson
+else
+	break
+fi
+done
+cd ..
+cd Town
+. ./Town

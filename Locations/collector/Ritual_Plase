@@ -1,0 +1,104 @@
+#!/bin/bash
+cd ../../Person
+. ./person
+. ./person_weapon
+cd ../Locations/Collector
+clear
+cat ../../Frames/collector/collector.txt
+echo ""
+echo -e "Вы идёте по коллектору\r\c"
+sleep 5
+echo -e "\033[K\c"
+clear
+cat ../../Frames/collector/stange_simbols.txt
+echo ""
+echo -e "На стене вы замечаете странные знаки\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Выберите вариант:"
+echo -e "1 - Пойти туда, куда ведут знаки"
+echo -e "2 - Сообщить крысоловам"
+read -r C
+echo -e "\033[5A"
+sleep 5
+tput ed
+case $C in
+1)
+ clear
+ cat ../../Frames/collector/ritual_plase.txt
+ echo ""
+ echo -e "Вы идёте по нарисованным на стенах знакам\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "Постепенно знаков становится всё больше и среди них появляются достаточно древние на вид\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "В какой-то момент вы выходите в небольшой зал, в центре которого на небольшом возвышении стоит алтарь\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "Выберите вариант:"
+ echo -e "1 - Осмотреть зал"
+ echo -e "2 - Сообщить крысоловам"
+ read -r C
+ echo -e "\033[5A"
+ sleep 5
+ tput ed
+ case $C in
+ 1)
+  echo -e "Вы осматриваете зал\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  echo -e "В целом, в самом зале нет ничего интересного, кроме алтаря\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  clear
+  cat ../../Frames/collector/book_and_knife.txt
+  echo ""
+  echo -e "Вы осматриваете алтарь\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  echo -e "Алтарь выглядит как изрезанный разными узорами и рунами кусок чёрного камня\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  echo -e "На алтаре лежит старая на вид книга и кинжал\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  echo -e "Вы берёте эти книгу и кинжал с собой\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  echo -e "Вы выбираетесь из коллекторов\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  if (( $feary == 1)); then
+   echo -e "Феари: Ну и мерзко же там\r\c"
+   sleep 5
+   echo -e "\033[K\c"
+   echo -e "Вы: Там это где?\r\c"
+   sleep 5
+   echo -e "\033[K\c"
+   echo -e "Феари: Ну, в этом, в подземелье\r\c"
+   sleep 5
+   echo -e "\033[K\c"
+   echo -e "Вы: Это не подземелье, это коллектор\r\c"
+   sleep 5
+   echo -e "\033[K\c"
+   echo -e "Феари: И что, оно же под землёй\r\c"
+   sleep 5
+   echo -e "\033[K\c"
+   echo -e "Вы: Да\r\c"
+   sleep 5
+   echo -e "\033[K\c"
+   echo -e "Феари: Значит подземелье\r\c"
+   sleep 5
+   echo -e "\033[K\c"
+  fi
+ 
+ ;;
+ 2)
+ ;;
+ esac
+;;
+2)
+ 
+;;
+esac
