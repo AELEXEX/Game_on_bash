@@ -1,0 +1,120 @@
+#!/bin/bash
+cd ../../Person
+. ./person
+. ./person_armor
+. ./person_headarmor
+cd ../Qwests/Hanter
+clear
+cat ../../Frames/qwests/ratter/enter.txt
+echo ""
+echo -e "Вы подходите к башне крысоловов\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "У дверей стоит мрачного вида амбал\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Амбал: Чё надо?\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы: Да вот, увидел объявление, ну и пришёл\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Амбал: Пошёл на ...\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Из-за двери раздаётся голос\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Голос: Ёрик, успакойся и пропусти его\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Привратник отходит и вы входите в башню\r\c"
+sleep 5
+echo -e "\033[K\c"
+clear
+cat ../../Frames/qwests/ratter/ladder.txt
+echo ""
+echo -e "За дверью сидит не менее мрачный старичёк\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Старик: Слышь, парень, ты по делу?\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Выберите вариант:"
+echo -e "1 - Да"
+echo -e "2 - Нет"
+read -r C
+echo -e "\033[5A"
+tput ed
+case $C in
+1)
+ echo -e "Вы: Да\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "Старик: Ну, тогда тебе на верх, там на верхнем этаже в конце коридора кабынет начальника\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ clear
+ cat ../../Frames/qwests/ratter/main_rattrer.txt
+ echo ""
+ echo -e "Вы поднимаетесь вверх по лестнице и входите в кабинет главного\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "В кабинете сидит такой же мрачный как и все здесь мужик\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "Главный крысолов: Здравствуй, путник, ты ведь за заданием прищёл?\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "Вы: Да, а вы откуда знаете?\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "Главный крысолов: Поверь мне, путник, я знаю достаточно много\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "Главный крысолов: Так вот, задание, сходи в коллектор под городом и осмотрись, если найдёшь что-то подозрительное, сообщи мне\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "Выберите вариант:"
+ echo -e "1 - Хорошо, схожу"
+ echo -e "2 - Не, не могу"
+ read -r C
+ echo -e "\033[5A"
+ tput ed
+ case $C in
+ 1)
+  echo -e "Вы: Хорошо, схожу\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  echo -e "Главный крысолов: Отлично, жду новостей\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  qwest_chein_progress[0]=1
+  sed -r -i.bac "s/qwest_chein_progress[0]([[:graph:]]+)/qwest_chein_progress[0]=${qwest_chein_progress[0]}/" ../../Person/person
+ ;;
+ 2)
+  echo -e "Вы: Не, извини, я не могу сейчас\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  echo -e "Главный крысолов: Ладно, странник, если что, ты знаешь, куда обратиться\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  cd ../..
+  . ./Menu
+ ;;
+ esac
+;;
+2)
+ echo -e "Вы: Да нет, просто мимо проходил\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "Старик: Ну и иди отсюда\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ cd ../..
+ . ./Menu
+;;
+esac

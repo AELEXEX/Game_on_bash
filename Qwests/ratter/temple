@@ -1,0 +1,163 @@
+#!/bin/bash
+cd ../../Person
+. ./person
+. ./person_armor
+. ./person_headarmor
+cd ../Qwests/Ratter
+clear
+cat ../../Frames/qwests/ratter/temple.txt
+echo ""
+echo -e "Вы подходите к храму\r\c"
+sleep 5
+echo -e "\033[K\c"
+clear
+cat ../../Frames/qwests/ratter/prist.txt
+echo ""
+echo -e "Вы входите в храм\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "По храму ходит несколько жрецов\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы подходите к одному из жрецов\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы: Слушай, парень, а ты не знаешь, кому артефакты отдавать\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "*вы показываете жрецу книгу и кинжал*\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Жрец: Ой, пойдём скорее, я вас отведу\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Жрец быстрым шагом уходит\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы идёте за жрецом\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Попетляв некоторое время по храмовым коридорам, вы входите в кабинет первосвещенника\r\c"
+sleep 5
+echo -e "\033[K\c"
+clear
+cat ../../Frames/qwests/ratter/main_prist.txt
+echo ""
+echo -e "Жрец: Господин первосвященник, к вам важный посетитель\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Жрец выходит из кабинета\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Первожрец: Присаживайтесь, молодой человек, и рассказывайте, что вы такого нашли\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы: Ну, вот, например *выкладываете книгу и кинжал*\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Первосвященник: Где ты это нашёл\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Выберите вариант:"
+echo -e "1 - В коллекторах"
+echo -e "2 - Где взял, там уже нет"
+read -r C
+echo -e "\033[5A"
+tput ed
+case $C in
+1)
+ echo -e "Вы: В коллекторах под городом\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "Первосвященник: И что там было?\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "Выберите вариант:"
+ echo -e "1 - Какой-то храм"
+ echo -e "2 - Да ничего особенного"
+ read -r C
+ echo -e "\033[5A"
+ tput ed
+ case $C in
+ 1)
+  echo -e "Вы: Что-то вроде храма\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  echo -e "Первосвященник: Отлично, сможешь показать, где это?\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  echo -e "Вы: Я уже показывал крысоловам\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  echo -e "Первосвященник: Кому ты это показывал?\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  echo -e "Вы: Крысоловам, а что?\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  echo -e "Первосвященник: ВЫМЕТАЙСЯ, И МУСОР СВОЙ ЗАБЕРИ!!!\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  echo -e "Вы забираете книгу и кинжал и быстро выходите из кабинета\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  echo -e "К вам пытается подойти мелкий жрец, но вы его игнорируете и выходите из храма\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+ ;;
+ 2)
+  echo -e "Вы: Да ничего особенного там не было\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  echo -e "Первосвященник: Ладно, не хочешь говорить, как хочешь, держи награду и иди отсюда\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  echo -e "Первосвященник: Только книгу с кинжалом оставь\r\c"
+  sleep 5
+  echo -e "\033[K\c"
+  let MOUNY=$MOUNY+500
+  sed -r -i.bac 's/MOUNY([[:graph:]]+)/MOUNY=$MOUNY/' ../../Person/person
+ ;;
+ esac
+;;
+2)
+ echo -e "\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "Вы: Где взял, там уже нет\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "Первосвященник: Ладно, раз уж не хочешь говорить, не буду допытываться, можешь идти\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+ echo -e "Первосвященник: Только артефакты оставь\r\c"
+ sleep 5
+ echo -e "\033[K\c"
+;;
+esac
+cd ../..
+./Menu
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

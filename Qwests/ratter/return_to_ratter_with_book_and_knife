@@ -1,0 +1,52 @@
+#!/bin/bash
+cd ../../Person
+. ./person
+. ./person_armor
+. ./person_headarmor
+cd ../Qwests/Hanter
+clear
+cat ../../Frames/qwests/ratter/main_rattrer.txt
+echo ""
+echo -e "Вы возврашаетесь к башне крысоловов\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "Вы входите в башню крысоловов\r\c"
+sleep 5
+echo -e "\033[K\c"
+echo -e "\r\c"
+sleep 5
+echo -e "\033K\c"
+echo -e "Главный крысолов: Ну как успехи?\r\c"
+sleep 5
+echo -e "\033K\c"
+echo -e "Вы: Есть успехи?\r\c"
+sleep 5
+echo -e "\033K\c"
+echo -e "Главный крысолов: И что за успехи?\r\c"
+sleep 5
+echo -e "\033K\c"
+echo -e "Вы: Ну, вот, например *вы выкладываете книгу и кинжал*\r\c"
+sleep 5
+echo -e "\033K\c"
+echo -e "Главный крысолов: Ого, сможешь показать, где ты это достал?\r\c"
+sleep 5
+echo -e "\033K\c"
+echo -e "Вы: Думаю да, если карту дадите\r\c"
+sleep 5
+echo -e "\033K\c"
+echo -e "Главный крысолов: Отлично, вот карта, показывай\r\c"
+sleep 5
+echo -e "\033K\c"
+echo -e "Вы указываете примерное место, где вы видели символы\r\c"
+sleep 5
+echo -e "\033K\c"
+echo -e "Главный крысолов: Отлично, мои парни сходят, осмотрят, вот твоя награда, а ты возми это и отнеси свои находки в храм\r\c"
+sleep 5
+echo -e "\033K\c"
+echo -e "Вы: Хорошо, схожу\r\c"
+sleep 5
+echo -e "\033[K\c"
+let MOUNY=$MOUNY+100
+sed -r -i.bac 's/MOUNY([[:graph:]]+)/MOUNY=$MOUNY/' ../../Person/person
+cd ../..
+./Menu
